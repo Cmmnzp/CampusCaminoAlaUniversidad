@@ -10,12 +10,15 @@ public class ProfesorNPC : MonoBehaviour
     public Transform jugador;
     public float distanciaInteraccion = 6f;
 
-    private bool yaHablo = false;
+    public GameObject panelPuzzle; // 🔥 PANEL DEL PUZZLE
+
     private int estadoDialogo = 0;
+    private bool puzzleIniciado = false;
 
     void Start()
     {
-        textoInteractuar.SetActive(false);
+        if (textoInteractuar != null)
+            textoInteractuar.SetActive(false);
     }
 
     void Update()
@@ -24,40 +27,61 @@ public class ProfesorNPC : MonoBehaviour
 
         float distancia = Vector3.Distance(transform.position, jugador.position);
 
-        // 🔍 DEBUG (míralo en consola)
-        Debug.Log("Distancia al profesor: " + distancia + " | yaHablo: " + yaHablo + " | estado: " + estadoDialogo);
-
-        if (distancia < distanciaInteraccion && yaHablo == false)
+        if (distancia < distanciaInteraccion)
         {
-            textoInteractuar.SetActive(true);
+            if (textoInteractuar != null)
+                textoInteractuar.SetActive(true);
+
+            // 🔥 BLOQUEAR INTERACCIÓN SI PUZZLE ABIERTO
+            if (panelPuzzle != null && panelPuzzle.activeSelf)
+                return;
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                AbrirDialogo();
+                Interactuar();
             }
         }
         else
         {
-            textoInteractuar.SetActive(false);
+            if (textoInteractuar != null)
+                textoInteractuar.SetActive(false);
         }
     }
 
-    void AbrirDialogo()
+    void Interactuar()
     {
-        panelDialogo.SetActive(true);
-        Time.timeScale = 0f;
-
+        // 🔴 DÍA 1
         if (estadoDialogo == 0)
         {
+            panelDialogo.SetActive(true);
+            Time.timeScale = 0f;
             textoDialogo.text = "Bienvenido al semestre. Tendrás 7 días para aprobar.";
         }
+        // 🔵 INICIO DÍA 2
         else if (estadoDialogo == 1)
         {
+            panelDialogo.SetActive(true);
+            Time.timeScale = 0f;
             textoDialogo.text = "Perfecto. Ahora realiza la actividad del día 2.";
         }
+        // 🟢 ACTIVIDAD (PUZZLE)
+        else if (estadoDialogo == 2)
+        {
+            if (!puzzleIniciado)
+            {
+                Debug.Log("🧩 Abriendo puzzle por primera vez");
 
-        yaHablo = true;
-        textoInteractuar.SetActive(false);
+                if (panelPuzzle != null)
+                    panelPuzzle.SetActive(true);
+
+                if (MissionManager.instancia != null)
+                {
+                    MissionManager.instancia.AsignarMision("Ordena el algoritmo correctamente");
+                }
+
+                puzzleIniciado = true;
+            }
+        }
     }
 
     public void CerrarDialogo()
@@ -65,34 +89,24 @@ public class ProfesorNPC : MonoBehaviour
         panelDialogo.SetActive(false);
         Time.timeScale = 1f;
 
+        // 🔴 TERMINA DÍA 1
         if (estadoDialogo == 0)
         {
-            // TERMINA DÍA 1
             if (MissionManager.instancia != null)
                 MissionManager.instancia.SiguienteMision();
 
             if (DayManager.instancia != null)
                 DayManager.instancia.SiguienteDia();
 
-            // 🔥 FORZAMOS CAMBIO A DÍA 2
-            Invoke("ActivarDia2", 2f);
+            estadoDialogo = 1;
         }
+        // 🔵 PASA A ACTIVIDAD
         else if (estadoDialogo == 1)
         {
             if (MissionManager.instancia != null)
                 MissionManager.instancia.SiguienteMision();
+
+            estadoDialogo = 2;
         }
-    }
-
-    void ActivarDia2()
-    {
-        Debug.Log("🔥 ACTIVANDO DÍA 2 EN PROFESOR");
-
-        estadoDialogo = 1;
-        yaHablo = false;
-
-        // 🔥 FORZAR que aparezca interacción
-        if (textoInteractuar != null)
-            textoInteractuar.SetActive(true);
     }
 }

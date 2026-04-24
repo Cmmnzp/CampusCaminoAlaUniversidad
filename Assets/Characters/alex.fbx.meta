@@ -13,39 +13,39 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Boy01_Brows_MAT2
-    second: {fileID: 2100000, guid: ee5ad38f3c119c54096012ca292b309d, type: 2}
+    second: {fileID: 2100000, guid: 89e14139b67875f4cbba3c7a96720c3f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Boy01_Eyes_MAT2
-    second: {fileID: 2100000, guid: 14d4488226b6aae4b868d934cd481fd0, type: 2}
+    second: {fileID: 2100000, guid: 0276b0347cc079d43a3e277226c4dae0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Boy01_Mouth_MAT2
-    second: {fileID: 2100000, guid: c555c850df530184a9ce491284c4ade7, type: 2}
+    second: {fileID: 2100000, guid: fc8457e0fb166fc4789c2b7c8dd0a01a, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_FacialAnimMap
-    second: {fileID: 2800000, guid: 67869c0102cce8744afb370337f1db7b, type: 3}
+    second: {fileID: 2800000, guid: a2a0009a683c12d4bbfacfc1abbb06ba, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_diffuse
-    second: {fileID: 2800000, guid: af4eea992654f364a8507e97e30b5cc6, type: 3}
+    second: {fileID: 2800000, guid: eca6f2cb7cb2be9459ffcbce5244f647, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_normal
-    second: {fileID: 2800000, guid: 179d4080ac0e6224c816b2db009e07b5, type: 3}
+    second: {fileID: 2800000, guid: 9063921d6f4a30649910fe7a32e46865, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_spec
-    second: {fileID: 2800000, guid: 40901f4eb22967144923d5ff1ede08b1, type: 3}
+    second: {fileID: 2800000, guid: 29948508b1aab564aa3779dc29e648e0, type: 3}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 0

@@ -13,6 +13,9 @@ public class DayManager : MonoBehaviour
 
     public GameObject[] dias;
 
+    // 🔥 NUEVO: referencia a Luis
+    public GameObject npcLuis;
+
     private string[] diasSemana =
     {
         "(Lunes)",
@@ -36,7 +39,6 @@ public class DayManager : MonoBehaviour
 
     void Update()
     {
-        // 🔥 SOLO PARA PRUEBAS (puedes quitar luego)
         if (Input.GetKeyDown(KeyCode.N))
             SiguienteDia();
 
@@ -51,7 +53,7 @@ public class DayManager : MonoBehaviour
             diaActual++;
             ActualizarTodo();
 
-            Debug.Log("Día actual: " + diaActual); // 🔍 debug útil
+            Debug.Log("Día actual: " + diaActual);
         }
     }
 
