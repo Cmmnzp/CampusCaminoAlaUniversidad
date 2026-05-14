@@ -3,7 +3,7 @@ using TMPro;
 
 public class DayManager : MonoBehaviour
 {
-    public static DayManager instancia; // 🔥 acceso global
+    public static DayManager instancia;
 
     public int diaActual = 1;
     public int totalDias = 7;
@@ -13,8 +13,10 @@ public class DayManager : MonoBehaviour
 
     public GameObject[] dias;
 
-    // 🔥 NUEVO: referencia a Luis
     public GameObject npcLuis;
+    public GameObject npcLaura;
+
+    public UI_DiaAnimado uiAnimado;
 
     private string[] diasSemana =
     {
@@ -29,7 +31,7 @@ public class DayManager : MonoBehaviour
 
     void Awake()
     {
-        instancia = this; // 🔥 importante
+        instancia = this;
     }
 
     void Start()
@@ -51,7 +53,11 @@ public class DayManager : MonoBehaviour
         if (diaActual < totalDias)
         {
             diaActual++;
+
             ActualizarTodo();
+
+            if (MissionManager.instancia != null)
+                MissionManager.instancia.ActualizarMisionPorDia();
 
             Debug.Log("Día actual: " + diaActual);
         }
@@ -62,7 +68,11 @@ public class DayManager : MonoBehaviour
         if (diaActual > 1)
         {
             diaActual--;
+
             ActualizarTodo();
+
+            if (MissionManager.instancia != null)
+                MissionManager.instancia.ActualizarMisionPorDia();
         }
     }
 
@@ -70,15 +80,29 @@ public class DayManager : MonoBehaviour
     {
         ActualizarUI();
         ActualizarDias();
+        ControlNPCs();
     }
 
     void ActualizarUI()
     {
-        if (textoDia != null)
-            textoDia.text = "Día " + diaActual + " / " + totalDias;
+        string textoDiaNuevo = "Día " + diaActual + " / " + totalDias;
+        string textoSemanaNuevo = "";
 
-        if (textoSemana != null && diaActual - 1 < diasSemana.Length)
-            textoSemana.text = diasSemana[diaActual - 1];
+        if (diaActual - 1 < diasSemana.Length)
+            textoSemanaNuevo = diasSemana[diaActual - 1];
+
+        if (uiAnimado != null)
+        {
+            uiAnimado.AnimarCambio(textoDiaNuevo, textoSemanaNuevo);
+        }
+        else
+        {
+            if (textoDia != null)
+                textoDia.text = textoDiaNuevo;
+
+            if (textoSemana != null)
+                textoSemana.text = textoSemanaNuevo;
+        }
     }
 
     void ActualizarDias()
@@ -88,5 +112,14 @@ public class DayManager : MonoBehaviour
             if (dias[i] != null)
                 dias[i].SetActive(i == diaActual - 1);
         }
+    }
+
+    void ControlNPCs()
+    {
+        if (npcLuis != null)
+            npcLuis.SetActive(diaActual == 2);
+
+        if (npcLaura != null)
+            npcLaura.SetActive(diaActual == 3);
     }
 }

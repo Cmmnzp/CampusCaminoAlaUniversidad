@@ -103,13 +103,11 @@ public class PuzzleProgramacion : MonoBehaviour
     {
         Debug.Log("🔥 Activando NPC Mateo para decision");
 
-        // 🔥 Activar a Luis (NPC del día 2)
         if (DayManager.instancia != null && DayManager.instancia.npcLuis != null)
         {
             DayManager.instancia.npcLuis.SetActive(true);
         }
 
-        // 🔥 Nueva misión
         if (MissionManager.instancia != null)
         {
             MissionManager.instancia.AsignarMision("Decide como estudiar con Mateo");
@@ -132,7 +130,6 @@ public class PuzzleProgramacion : MonoBehaviour
         }
     }
 
-    // 🔴 ESTE MÉTODO YA NO SE USA AQUÍ, PERO LO DEJAMOS PARA LA DECISIÓN
     void CambiarDia()
     {
         if (DayManager.instancia != null)

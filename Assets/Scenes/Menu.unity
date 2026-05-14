@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d263a3a3e15b440a6cb6e0ef854d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneManagerGame
-  sceneName: Juego
   menuPanel: {fileID: 0}
   optionsPanel: {fileID: 0}
 --- !u!4 &45993762
@@ -435,10 +434,10 @@ RectTransform:
   - {fileID: 956667870}
   m_Father: {fileID: 1950789686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.35547918, y: 0.5602221}
-  m_AnchorMax: {x: 0.72879165, y: 0.59155554}
-  m_AnchoredPosition: {x: 3.7245483, y: -0.0021591187}
-  m_SizeDelta: {x: 7.4572988, y: 7.524022}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 84.72455, y: 81.99784}
+  m_SizeDelta: {x: -1196.5427, y: 41.52402}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &246683976
 MonoBehaviour:
@@ -521,7 +520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d263a3a3e15b440a6cb6e0ef854d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneManagerGame
-  sceneName: Menu
   menuPanel: {fileID: 1226192924}
   optionsPanel: {fileID: 1950789685}
 --- !u!4 &285308336
@@ -820,7 +818,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 816f84b196e3f454da1b774a5c239578, type: 3}
+  m_Texture: {fileID: 2800000, guid: 77a2fa0201ab57a4c8bdad37016c3089, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -862,7 +860,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845273746}
   m_LocalRotation: {x: -0.24715, y: -0.057797424, z: -0.014769987, w: 0.9671392}
-  m_LocalPosition: {x: 0, y: 0, z: -128.7082}
+  m_LocalPosition: {x: 0, y: 0, z: -157.7325}
   m_LocalScale: {x: 1, y: 0.8600002, z: -0.30999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -870,8 +868,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -28.67, y: -6.84, z: 0}
   m_AnchorMin: {x: 0.3206875, y: 0.037}
   m_AnchorMax: {x: 0.48339584, y: 0.14718518}
-  m_AnchoredPosition: {x: 174.13104, y: 304.66678}
-  m_SizeDelta: {x: 126.2448, y: -217.4849}
+  m_AnchoredPosition: {x: 150.07361, y: 352.12897}
+  m_SizeDelta: {x: 197.0721, y: -246.6232}
   m_Pivot: {x: 0.5395962, y: 0.30798045}
 --- !u!114 &845273748
 MonoBehaviour:
@@ -1034,11 +1032,11 @@ RectTransform:
   - {fileID: 1498032429}
   m_Father: {fileID: 246683974}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 10.000061, y: 0.000022888184}
+  m_SizeDelta: {x: -20, y: 20}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &1226192924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1143,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262054776}
   m_LocalRotation: {x: -0.24715, y: -0.057797424, z: -0.014769987, w: 0.9671392}
-  m_LocalPosition: {x: 0, y: 0, z: -76.1382}
+  m_LocalPosition: {x: 0, y: 0, z: -99.3858}
   m_LocalScale: {x: 1, y: 0.8600002, z: -0.30999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1153,8 +1151,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -28.67, y: -6.84, z: 0}
   m_AnchorMin: {x: 0.3823363, y: 0.22500001}
   m_AnchorMax: {x: 0.59800005, y: 0.28240743}
-  m_AnchoredPosition: {x: 0.5907742, y: 23.621292}
-  m_SizeDelta: {x: 11.896484, y: -144.2789}
+  m_AnchoredPosition: {x: -30.7071, y: 59.0174}
+  m_SizeDelta: {x: 83.1085, y: -181.1873}
   m_Pivot: {x: 0.5395962, y: 0.30798045}
 --- !u!114 &1262054778
 MonoBehaviour:
@@ -1412,8 +1410,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.55670846, y: 0.037}
   m_AnchorMax: {x: 0.734, y: 0.13985187}
-  m_AnchoredPosition: {x: -301.9917, y: 87.30411}
-  m_SizeDelta: {x: -699.4588, y: -173.8727}
+  m_AnchoredPosition: {x: -333.32, y: 95.8556}
+  m_SizeDelta: {x: -841.12, y: -205.6289}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1339230796
 MonoBehaviour:
@@ -1746,6 +1744,7 @@ MonoBehaviour:
   audioSource: {fileID: 1526266230}
   menuMusic: {fileID: 8300000, guid: d188fe6c17ccf95498d883db18c7856a, type: 3}
   gameMusic: {fileID: 8300000, guid: f94129c66f59abe4b9e7cbb3d433cd29, type: 3}
+  sliderVolumen: {fileID: 246683976}
 --- !u!4 &1526266229
 Transform:
   m_ObjectHideFlags: 0

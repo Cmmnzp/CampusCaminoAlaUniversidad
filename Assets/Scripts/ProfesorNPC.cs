@@ -3,110 +3,164 @@ using TMPro;
 
 public class ProfesorNPC : MonoBehaviour
 {
+    [Header("UI")]
     public GameObject panelDialogo;
     public TextMeshProUGUI textoDialogo;
     public GameObject textoInteractuar;
 
-    public Transform jugador;
-    public float distanciaInteraccion = 6f;
+    [Header("Jugador")]
+    public player jugador;
 
-    public GameObject panelPuzzle; // 🔥 PANEL DEL PUZZLE
+    [Header("Libro de teoría")]
+    public GameObject libroTeoria;
 
-    private int estadoDialogo = 0;
-    private bool puzzleIniciado = false;
+    private bool jugadorCerca = false;
+    private bool dialogoActivo = false;
+    private bool interaccionFinalizada = false;
+
+    private int indiceDialogo = 0;
+
+    private string[] dialogos =
+    {
+        "Así que tú eres Alex...",
+
+        "Mateo me habló de ti. Esta Universidad necesita ayuda.",
+
+        "Durante los próximos días enfrentarás distintas pruebas y desafíos.",
+
+        "Pero antes de resolver cualquier actividad, debes comprender la teoría.",
+
+        "Ese libro contiene los fundamentos de lógica y algoritmos.",
+
+        "Acércate al libro, estudia la información y luego podrás resolver el desafío."
+    };
 
     void Start()
     {
         if (textoInteractuar != null)
             textoInteractuar.SetActive(false);
+
+        if (panelDialogo != null)
+            panelDialogo.SetActive(false);
+
+        if (libroTeoria != null)
+            libroTeoria.SetActive(false);
     }
 
     void Update()
     {
-        if (jugador == null) return;
+        if (interaccionFinalizada)
+            return;
 
-        float distancia = Vector3.Distance(transform.position, jugador.position);
+        if (!jugadorCerca)
+            return;
 
-        if (distancia < distanciaInteraccion)
+        if (!dialogoActivo && textoInteractuar != null)
         {
-            if (textoInteractuar != null)
-                textoInteractuar.SetActive(true);
-
-            // 🔥 BLOQUEAR INTERACCIÓN SI PUZZLE ABIERTO
-            if (panelPuzzle != null && panelPuzzle.activeSelf)
-                return;
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Interactuar();
-            }
+            textoInteractuar.SetActive(true);
         }
-        else
+
+        if (Input.GetKeyDown(KeyCode.E) && !dialogoActivo)
         {
+            IniciarDialogo();
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (interaccionFinalizada)
+            return;
+
+        if (other.CompareTag("Player"))
+        {
+            jugadorCerca = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            jugadorCerca = false;
+
             if (textoInteractuar != null)
                 textoInteractuar.SetActive(false);
         }
     }
 
-    void Interactuar()
+    void IniciarDialogo()
     {
-        // 🔴 DÍA 1
-        if (estadoDialogo == 0)
-        {
+        dialogoActivo = true;
+        indiceDialogo = 0;
+
+        if (panelDialogo != null)
             panelDialogo.SetActive(true);
-            Time.timeScale = 0f;
-            textoDialogo.text = "Bienvenido al semestre. Tendrás 7 días para aprobar.";
-        }
-        // 🔵 INICIO DÍA 2
-        else if (estadoDialogo == 1)
+
+        if (textoInteractuar != null)
+            textoInteractuar.SetActive(false);
+
+        if (jugador != null)
+            jugador.puedeMoverse = false;
+
+        MostrarDialogo();
+    }
+
+    void MostrarDialogo()
+    {
+        if (textoDialogo != null)
         {
-            panelDialogo.SetActive(true);
-            Time.timeScale = 0f;
-            textoDialogo.text = "Perfecto. Ahora realiza la actividad del día 2.";
-        }
-        // 🟢 ACTIVIDAD (PUZZLE)
-        else if (estadoDialogo == 2)
-        {
-            if (!puzzleIniciado)
-            {
-                Debug.Log("🧩 Abriendo puzzle por primera vez");
-
-                if (panelPuzzle != null)
-                    panelPuzzle.SetActive(true);
-
-                if (MissionManager.instancia != null)
-                {
-                    MissionManager.instancia.AsignarMision("Ordena el algoritmo correctamente");
-                }
-
-                puzzleIniciado = true;
-            }
+            textoDialogo.text = dialogos[indiceDialogo];
         }
     }
 
-    public void CerrarDialogo()
+    public void SiguienteDialogo()
     {
-        panelDialogo.SetActive(false);
-        Time.timeScale = 1f;
+        indiceDialogo++;
 
-        // 🔴 TERMINA DÍA 1
-        if (estadoDialogo == 0)
+        if (indiceDialogo >= dialogos.Length)
         {
-            if (MissionManager.instancia != null)
-                MissionManager.instancia.SiguienteMision();
-
-            if (DayManager.instancia != null)
-                DayManager.instancia.SiguienteDia();
-
-            estadoDialogo = 1;
+            FinalizarDialogo();
+            return;
         }
-        // 🔵 PASA A ACTIVIDAD
-        else if (estadoDialogo == 1)
+
+        MostrarDialogo();
+    }
+
+    void FinalizarDialogo()
+    {
+        dialogoActivo = false;
+        interaccionFinalizada = true;
+
+        if (panelDialogo != null)
+            panelDialogo.SetActive(false);
+
+        if (textoInteractuar != null)
+            textoInteractuar.SetActive(false);
+
+        if (jugador != null)
+            jugador.puedeMoverse = true;
+
+        if (libroTeoria != null)
+            libroTeoria.SetActive(true);
+
+        if (MissionManager.instancia != null)
         {
-            if (MissionManager.instancia != null)
-                MissionManager.instancia.SiguienteMision();
+            MissionManager.instancia.SetEstado(1);
 
-            estadoDialogo = 2;
+            MissionManager.instancia.AsignarMision(
+                "Estudia la teoría del libro"
+            );
         }
+
+        if (DayEndManager.instancia != null)
+        {
+            DayEndManager.instancia.TerminarDia(
+                "Conociste al profesor y recibiste tu primera lección"
+            );
+        }
+
+        enabled = false;
+
+        gameObject.SetActive(false);
     }
 }

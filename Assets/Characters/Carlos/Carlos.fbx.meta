@@ -45,7 +45,7 @@ ModelImporter:
       name: Ch33_1002_Normal
     second: {fileID: 2800000, guid: 564594c1e92105340903e82d12ebad77, type: 3}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

@@ -3,10 +3,11 @@
 public class NPC_Luis : MonoBehaviour
 {
     public GameObject indicadorE;
-    public GameObject panelDialogo; // opcional (puedes no usarlo)
+    public GameObject panelDialogo;
     public DecisionDia2 decision;
 
     private bool jugadorCerca = false;
+    private bool interaccionTerminada = false;
 
     void Start()
     {
@@ -19,29 +20,32 @@ public class NPC_Luis : MonoBehaviour
 
     void Update()
     {
-        if (!jugadorCerca) return;
+        if (interaccionTerminada)
+            return;
+
+        if (!jugadorCerca)
+            return;
 
         if (indicadorE != null)
             indicadorE.SetActive(true);
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Luis: interacción activada");
+            if (indicadorE != null)
+                indicadorE.SetActive(false);
 
-            // 🔥 IMPORTANTE: abrir decisión directamente
             if (decision != null)
             {
                 decision.MostrarDecision();
-            }
-            else
-            {
-                Debug.LogWarning("❌ DecisionDia2 NO asignado en Luis");
             }
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
+        if (interaccionTerminada)
+            return;
+
         if (other.CompareTag("Player"))
         {
             jugadorCerca = true;
@@ -57,5 +61,18 @@ public class NPC_Luis : MonoBehaviour
             if (indicadorE != null)
                 indicadorE.SetActive(false);
         }
+    }
+
+    public void OcultarNPC()
+    {
+        interaccionTerminada = true;
+
+        if (indicadorE != null)
+            indicadorE.SetActive(false);
+
+        if (panelDialogo != null)
+            panelDialogo.SetActive(false);
+
+        gameObject.SetActive(false);
     }
 }

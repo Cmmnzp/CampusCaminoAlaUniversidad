@@ -45,8 +45,8 @@ ModelImporter:
       name: Boy01_spec
     second: {fileID: 2800000, guid: 29948508b1aab564aa3779dc29e648e0, type: 3}
   materials:
-    materialImportMode: 1
-    materialName: 0
+    materialImportMode: 2
+    materialName: 2
     materialSearch: 1
     materialLocation: 0
   animations:

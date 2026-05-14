@@ -10,10 +10,10 @@ public class PlayerStats : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
-            energia -= 10;
+            ReducirEnergia(10);
 
         if (Input.GetKeyDown(KeyCode.T))
-            energia += 10;
+            AumentarEnergia(10);
 
         if (Input.GetKeyDown(KeyCode.Y))
             AumentarConocimiento(10);
@@ -28,10 +28,34 @@ public class PlayerStats : MonoBehaviour
             ReducirEstres(10);
 
         if (Input.GetKeyDown(KeyCode.I))
-            relaciones += 5;
+            AumentarRelaciones(5);
 
         if (Input.GetKeyDown(KeyCode.K))
-            relaciones -= 5;
+            ReducirRelaciones(5);
+    }
+
+    public void AumentarEnergia(float valor)
+    {
+        energia += valor;
+        energia = Mathf.Clamp(energia, 0, 100);
+
+        Debug.Log("+ Energía: " + energia);
+
+        MostrarFeedback("+" + valor + " Energía", Color.yellow);
+
+        ActualizarUI();
+    }
+
+    public void ReducirEnergia(float valor)
+    {
+        energia -= valor;
+        energia = Mathf.Clamp(energia, 0, 100);
+
+        Debug.Log("- Energía: " + energia);
+
+        MostrarFeedback("-" + valor + " Energía", Color.red);
+
+        ActualizarUI();
     }
 
     public void AumentarConocimiento(float valor)
@@ -40,6 +64,10 @@ public class PlayerStats : MonoBehaviour
         conocimiento = Mathf.Clamp(conocimiento, 0, 100);
 
         Debug.Log("+ Conocimiento: " + conocimiento);
+
+        MostrarFeedback("+" + valor + " Conocimiento", Color.cyan);
+
+        ActualizarUI();
     }
 
     public void ReducirConocimiento(float valor)
@@ -48,6 +76,10 @@ public class PlayerStats : MonoBehaviour
         conocimiento = Mathf.Clamp(conocimiento, 0, 100);
 
         Debug.Log("- Conocimiento: " + conocimiento);
+
+        MostrarFeedback("-" + valor + " Conocimiento", Color.red);
+
+        ActualizarUI();
     }
 
     public void AumentarEstres(float valor)
@@ -56,6 +88,10 @@ public class PlayerStats : MonoBehaviour
         estres = Mathf.Clamp(estres, 0, 100);
 
         Debug.Log("+ Estrés: " + estres);
+
+        MostrarFeedback("+" + valor + " Estrés", Color.red);
+
+        ActualizarUI();
     }
 
     public void ReducirEstres(float valor)
@@ -64,5 +100,54 @@ public class PlayerStats : MonoBehaviour
         estres = Mathf.Clamp(estres, 0, 100);
 
         Debug.Log("- Estrés: " + estres);
+
+        MostrarFeedback("-" + valor + " Estrés", Color.green);
+
+        ActualizarUI();
+    }
+
+    public void AumentarRelaciones(float valor)
+    {
+        relaciones += valor;
+        relaciones = Mathf.Clamp(relaciones, 0, 100);
+
+        Debug.Log("+ Relaciones: " + relaciones);
+
+        MostrarFeedback("+" + valor + " Relaciones", Color.magenta);
+
+        ActualizarUI();
+    }
+
+    public void ReducirRelaciones(float valor)
+    {
+        relaciones -= valor;
+        relaciones = Mathf.Clamp(relaciones, 0, 100);
+
+        Debug.Log("- Relaciones: " + relaciones);
+
+        MostrarFeedback("-" + valor + " Relaciones", Color.red);
+
+        ActualizarUI();
+    }
+
+    void MostrarFeedback(string mensaje, Color color)
+    {
+        if (StatsFeedbackUI.instancia != null)
+        {
+            StatsFeedbackUI.instancia.Mostrar(mensaje, color);
+        }
+    }
+
+    void ActualizarUI()
+    {
+        if (BarsUI.instancia != null)
+        {
+            BarsUI.instancia.ActualizarBarras(
+                energia,
+                conocimiento,
+                estres,
+                relaciones
+            );
+        }
     }
 }

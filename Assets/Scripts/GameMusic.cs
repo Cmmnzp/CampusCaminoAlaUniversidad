@@ -4,7 +4,8 @@ public class GameMusic : MonoBehaviour
 {
     void Start()
     {
-        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        AudioManager audioManager =
+            FindFirstObjectByType<AudioManager>();
 
         if (audioManager != null)
         {

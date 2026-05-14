@@ -3,15 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerGame : MonoBehaviour
 {
-    public string sceneName = "Juego";
-
     public GameObject menuPanel;
     public GameObject optionsPanel;
 
     public void StartGame()
     {
-        Debug.Log("Boton Play Presionado ...");    
-        SceneManager.LoadScene(1);
+        Debug.Log("Boton Play Presionado ...");
+
+        SceneManager.LoadScene("IntroGameplay");
     }
 
     public void OpenOptions()
