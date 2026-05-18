@@ -22,17 +22,11 @@ public class LibroEnergia : MonoBehaviour
 
     void Update()
     {
-        // =====================================================
-        // ROTAR LIBRO
-        // =====================================================
 
         transform.Rotate(0,
             velocidadRotacion * Time.deltaTime,
             0);
 
-        // =====================================================
-        // FLOTAR SUAVEMENTE
-        // =====================================================
 
         float nuevaAltura =
             Mathf.Sin(Time.time * velocidadFlotar)
@@ -44,9 +38,6 @@ public class LibroEnergia : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // =====================================================
-        // DETECTAR JUGADOR
-        // =====================================================
 
         if (other.CompareTag("Player"))
         {
@@ -55,12 +46,10 @@ public class LibroEnergia : MonoBehaviour
 
             if (stats != null)
             {
-                // DAR ENERGÍA
                 stats.AumentarEnergia(energiaQueDa);
 
                 Debug.Log("Libro recogido");
 
-                // DESTRUIR LIBRO
                 if (destruirAlRecoger)
                 {
                     Destroy(gameObject);

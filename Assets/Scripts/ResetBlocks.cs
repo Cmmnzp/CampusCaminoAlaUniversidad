@@ -8,13 +8,11 @@ public class ResetBlocks : MonoBehaviour
 
     public void ReiniciarBloques()
     {
-        // Reiniciar bloques
         foreach (DraggableBlock block in blocks)
         {
             block.ResetBlock();
         }
 
-        // Limpiar slots
         foreach (DropSlot slot in slots)
         {
             slot.currentBlock = "";

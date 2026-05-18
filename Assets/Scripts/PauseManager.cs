@@ -73,7 +73,6 @@ public class PauseManager : MonoBehaviour
 
     public void CloseControls()
     {
-       // Debug.log("Volver Funciona");
         controlsPanel.SetActive(false);
         pausePanel.SetActive(true);
     }

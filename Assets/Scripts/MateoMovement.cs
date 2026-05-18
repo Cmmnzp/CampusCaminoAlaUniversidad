@@ -33,7 +33,6 @@ public class MateoMovement : MonoBehaviour
         {
             float distanciaJugador = Vector3.Distance(transform.position, jugador.position);
 
-            // 🔴 Si el jugador se aleja
             if (distanciaJugador > distanciaMax)
             {
                 anim.SetBool("caminar", false);
@@ -47,18 +46,15 @@ public class MateoMovement : MonoBehaviour
                 return;
             }
 
-            // 🟢 Reactivar animación
             if (!anim.GetBool("caminar"))
                 anim.SetBool("caminar", true);
 
-            // 🔵 Texto mientras camina
             if (textoMateo != null && (tutorial == null || !tutorialActivo()))
             {
                 textoMateo.gameObject.SetActive(true);
                 textoMateo.text = "Sígueme, te mostraré el aula";
             }
 
-            // 🟡 Movimiento
             Vector3 direccion = (destino.position - transform.position).normalized;
             transform.position += direccion * velocidad * Time.deltaTime;
 
@@ -67,23 +63,19 @@ public class MateoMovement : MonoBehaviour
 
             float distancia = Vector3.Distance(transform.position, destino.position);
 
-            // 🟣 Llegada al destino
             if (distancia < 0.5f)
             {
                 moviendo = false;
                 anim.SetBool("caminar", false);
 
-                // 🔥 AVANZAR MISIÓN
                 if (MissionManager.instancia != null)
                 {
                     MissionManager.instancia.SiguienteMision();
                 }
 
-                // 👉 Mirar al jugador
                 Vector3 mirarJugador = new Vector3(jugador.position.x, transform.position.y, jugador.position.z);
                 transform.LookAt(mirarJugador);
 
-                // 🔥 MENSAJE FINAL
                 if (textoMateo != null)
                 {
                     textoMateo.gameObject.SetActive(true);
@@ -92,7 +84,6 @@ public class MateoMovement : MonoBehaviour
                     Invoke("OcultarMensajeFinal", 4f);
                 }
 
-                // 👉 Activar profesor
                 if (profesor != null)
                     profesor.SetActive(true);
             }
@@ -107,7 +98,6 @@ public class MateoMovement : MonoBehaviour
             return;
         }
 
-        // 🔴 Desactivar interacción con Mateo
         if (interaccion != null)
         {
             interaccion.puedeInteractuar = false;
@@ -118,7 +108,6 @@ public class MateoMovement : MonoBehaviour
 
     IEnumerator MirarYCaminar()
     {
-        // 👉 Mira al jugador antes de moverse
         Vector3 lookPos = new Vector3(jugador.position.x, transform.position.y, jugador.position.z);
         transform.LookAt(lookPos);
 
@@ -127,7 +116,6 @@ public class MateoMovement : MonoBehaviour
         anim.SetBool("caminar", true);
         moviendo = true;
 
-        // 🔥 Inicia tutorial
         if (tutorial != null)
         {
             tutorial.IniciarTutorial();

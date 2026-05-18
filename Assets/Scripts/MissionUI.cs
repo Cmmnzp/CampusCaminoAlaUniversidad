@@ -28,7 +28,6 @@ public class MissionUI : MonoBehaviour
 
     IEnumerator MostrarMision(string nuevaMision)
     {
-        // 🔴 SOLO mostrar "completada" si NO es la primera misión
         if (!primeraMision)
         {
             textoMision.text = "✔ Misión completada";
@@ -37,17 +36,14 @@ public class MissionUI : MonoBehaviour
 
         primeraMision = false;
 
-        // Fade OUT
         for (float i = 1; i >= 0; i -= Time.deltaTime * 2)
         {
             canvasGroup.alpha = i;
             yield return null;
         }
 
-        // Nueva misión
         textoMision.text = "Misión: " + nuevaMision;
 
-        // Fade IN
         for (float i = 0; i <= 1; i += Time.deltaTime * 2)
         {
             canvasGroup.alpha = i;

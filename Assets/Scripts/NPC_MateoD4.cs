@@ -135,9 +135,6 @@ public class NPC_MateoD4 : MonoBehaviour
             panelDecisionD4.SetActive(true);
     }
 
-    // =====================================================
-    // DECISION SOLO
-    // =====================================================
 
     public void ElegirSolo()
     {
@@ -148,9 +145,6 @@ public class NPC_MateoD4 : MonoBehaviour
             panelSolo.SetActive(true);
     }
 
-    // =====================================================
-    // DECISION EQUIPO
-    // =====================================================
 
     public void ElegirEquipo()
     {
@@ -161,9 +155,6 @@ public class NPC_MateoD4 : MonoBehaviour
             panelEquipo.SetActive(true);
     }
 
-    // =====================================================
-    // CONTINUAR SOLO
-    // =====================================================
 
     public void ContinuarSolo()
     {
@@ -178,9 +169,6 @@ public class NPC_MateoD4 : MonoBehaviour
         FinalizarDia("Trabajaste solo");
     }
 
-    // =====================================================
-    // CONTINUAR EQUIPO
-    // =====================================================
 
     public void ContinuarEquipo()
     {
@@ -197,9 +185,6 @@ public class NPC_MateoD4 : MonoBehaviour
         FinalizarDia("Trabajaste con Mateo");
     }
 
-    // =====================================================
-    // FINALIZAR DIA
-    // =====================================================
 
     void FinalizarDia(string decision)
     {

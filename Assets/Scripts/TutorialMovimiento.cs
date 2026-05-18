@@ -90,7 +90,6 @@ public class TutorialMovimiento : MonoBehaviour
             stats.AumentarConocimiento(10);
             stats.ReducirEstres(5);
 
-            // 🔥 opcional si tienes relaciones
             if (stats.relaciones >= 0)
                 stats.relaciones += 3;
         }

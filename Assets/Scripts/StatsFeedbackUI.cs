@@ -18,7 +18,6 @@ public class StatsFeedbackUI : MonoBehaviour
     [Header("Efectos")]
     public float escalaInicial = 1.3f;
 
-    // 🔥 stack vertical
     private float offsetY = 0f;
     private float separacion = 30f;
 
@@ -38,7 +37,6 @@ public class StatsFeedbackUI : MonoBehaviour
 
         nuevo.SetActive(true);
 
-        // 🟢 POSICIÓN ORDENADA (STACK)
         Vector3 pos = texto.transform.localPosition;
         pos.y += offsetY;
         texto.transform.localPosition = pos;
@@ -55,7 +53,6 @@ public class StatsFeedbackUI : MonoBehaviour
 
         float t = 0;
 
-        // 💥 POP IN + SUBIDA
         texto.transform.localScale = Vector3.one * escalaInicial;
 
         while (t < 1)
@@ -72,10 +69,8 @@ public class StatsFeedbackUI : MonoBehaviour
             yield return null;
         }
 
-        // ⏸️ TIEMPO VISIBLE
         yield return new WaitForSeconds(tiempoVisible);
 
-        // 🌫️ FADE + SUBIDA SUAVE
         float fade = 1;
 
         while (fade > 0)
@@ -94,7 +89,6 @@ public class StatsFeedbackUI : MonoBehaviour
             yield return null;
         }
 
-        // 🔄 LIBERAR ESPACIO EN STACK
         offsetY -= separacion;
 
         Destroy(texto.gameObject);

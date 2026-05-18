@@ -91,7 +91,6 @@ public class LibroFelipe : MonoBehaviour
         if (jugador != null)
             jugador.puedeMoverse = true;
 
-        // 🔥 NUEVA MISIÓN
         if (MissionManager.instancia != null)
         {
             MissionManager.instancia.SetEstado(2);
@@ -101,7 +100,6 @@ public class LibroFelipe : MonoBehaviour
             );
         }
 
-        // 🔥 ABRIR PROYECTO
         if (npcFelipe != null)
         {
             npcFelipe.AbrirProyecto();

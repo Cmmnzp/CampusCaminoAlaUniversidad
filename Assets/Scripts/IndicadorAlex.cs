@@ -22,11 +22,9 @@ public class IndicadorAlex : MonoBehaviour
             Vector3 worldPos = jugador.position + offset;
             Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
-            // 🔥 seguir en pantalla
             transform.position = screenPos;
         }
 
-        // 🔥 lógica de iconos
         if (stats != null && icono != null)
         {
             if (stats.energia < 20)
