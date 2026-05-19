@@ -67,6 +67,68 @@ public class ApiManager : MonoBehaviour
             );
         }
     }
+    public IEnumerator GuardarPartida(
+    PartidaData partida
+)
+    {
+        //-----------------------------------
+        // JSON
+        //-----------------------------------
+        string json =
+            JsonUtility.ToJson(partida);
+
+        Debug.Log(json);
+
+        //-----------------------------------
+        // REQUEST
+        //-----------------------------------
+        UnityWebRequest request =
+            new UnityWebRequest(
+                baseUrl + "Partidas",
+                "POST"
+            );
+
+        //-----------------------------------
+        // BODY
+        //-----------------------------------
+        byte[] bodyRaw =
+            Encoding.UTF8.GetBytes(json);
+
+        request.uploadHandler =
+            new UploadHandlerRaw(bodyRaw);
+
+        request.downloadHandler =
+            new DownloadHandlerBuffer();
+
+        //-----------------------------------
+        // HEADER
+        //-----------------------------------
+        request.SetRequestHeader(
+            "Content-Type",
+            "application/json"
+        );
+
+        //-----------------------------------
+        // ENVIAR
+        //-----------------------------------
+        yield return request.SendWebRequest();
+
+        //-----------------------------------
+        // RESPUESTA
+        //-----------------------------------
+        if (request.result ==
+            UnityWebRequest.Result.Success)
+        {
+            Debug.Log("PARTIDA GUARDADA");
+            Debug.Log(request.downloadHandler.text);
+        }
+        else
+        {
+            Debug.LogError("ERROR GUARDANDO");
+            Debug.LogError(request.error);
+            Debug.LogError(request.downloadHandler.text);
+        }
+    }
 
     public IEnumerator Login(
         string correo,
